@@ -443,16 +443,14 @@ int my_main (int argc, char** argv)
 #else
 
 //#define DIR_OPENMRAC_DAT "/home/vojta/"
-    strncpy(gameDatPathCstr,
-    #ifdef DIR_OPENMRAC_DAT
+    
+    if (argc < 2) {
+        fprintf(stderr, "Please specify the path to openmrac.dat as a command-line argument.\n");
+        return 1;
+    }
+    strncpy(gameDatPathCstr, argv[1], 1023);
+    gameDatPathCstr[1023] = '\0';
 
-        #define m2s_(a) m2s2_(a)
-        #define m2s2_(a) #a
-
-        m2s_(DIR_OPENMRAC_DAT)
-    #endif
-            "openmrac.dat"
-            , 1023);
 #endif
 
     // inicializace načítání z datového souboru
